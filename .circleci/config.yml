@@ -11,6 +11,7 @@ jobs:
     - run: mkdir ~/rspec
     - run:
         command: touch ~/rspec/rspec.xml
+    - run:
         command: bundle exec rspec --format RspecJunitFormatter -out ~/rspec/rspec.xml
         when: always
     - store_test_results:
