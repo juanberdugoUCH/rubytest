@@ -25,9 +25,7 @@ jobs:
     - run:
         command: allure generate ~/rspec --report-dir ~/rspec/allure-reports
     - run:
-        command: zip -r allure.zip ~/rspec/allure-reports
-    - run:
-        command: mv ~/rspec/allure-reports/allure.zip ~/rspec/allure.zip
+        command: zip -r ~/rspec/allure.zip ~/rspec/allure-reports
     - run:
         command: rm -r ~/rspec/allure-reports
     - store_artifacts:
