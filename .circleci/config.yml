@@ -6,7 +6,6 @@ jobs:
     - image: circleci/ruby:2.4.2-jessie-node # the primary container, where your job's commands are run
     steps:
     - checkout # check out the code in the project directory
-    - run: apt-get install allure-commandline
     - run: bundle check --path=vendor/bundle || bundle install --path=vendor/bundle --jobs=4 --retry=3
     - run: mkdir ~/rspec
     - run:
@@ -14,9 +13,25 @@ jobs:
     - run:
         command: bundle exec rspec --format documentation  --format RspecJunitFormatter -o ~/rspec/rspec.xml
         when: always
-    # Save artifacts
     - store_artifacts:
         path: ~/rspec
         destination: build
     - store_test_results:
         path: ~/rspec
+
+  allure:
+    docker:
+    - image: automationwizards/allure:1.4.24.RC3
+    steps:
+    - run: docker run \
+        -v ~/rspec/allure-report:/allure-report \   # Mandatory - Where to place the complied report
+        -v ~/rspec:/allure-results \ # Mandatory - Where to look for test runs
+        -v ~/rspec/allure-config:/allure-config \   # Optional - Where to look for an allure.properties file
+        automationwizards/allure:1.4.24.RC3 allure report generate /allure-results -o /allure-report
+
+workflows:
+  version: 2
+  workflow:
+    jobs:
+    - build
+    - allure
