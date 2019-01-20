@@ -106,6 +106,19 @@
         </SOURCES>
       </library>
     </orderEntry>
+    <orderEntry type="module-library">
+      <library name="rspec_junit_formatter (vbundled(0.4.1)) [path][gem]" type="rubylib">
+        <properties>
+          <option name="version" value="3" />
+        </properties>
+        <CLASSES>
+          <root url="file://$MODULE_DIR$/path/ruby/2.4.0/gems/rspec_junit_formatter-0.4.1/lib" />
+        </CLASSES>
+        <SOURCES>
+          <root url="file://$MODULE_DIR$/path/ruby/2.4.0/gems/rspec_junit_formatter-0.4.1/lib" />
+        </SOURCES>
+      </library>
+    </orderEntry>
     <orderEntry type="library" scope="PROVIDED" name="bundler (v1.16.6, rbenv: 2.4.3) [gem]" level="application" />
   </component>
 </module>
