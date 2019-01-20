@@ -23,7 +23,7 @@ jobs:
         command: bundle exec rspec --format documentation  --format RspecJunitFormatter -o ~/rspec/rspec.xml
         when: always
     - run:
-        command: allure ~/rspec
+        command: allure generate ~/rspec
     - store_artifacts:
         path: ~/rspec
         destination: build
