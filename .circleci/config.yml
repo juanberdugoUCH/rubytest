@@ -27,5 +27,8 @@ jobs:
     - store_artifacts:
         path: ~/rspec
         destination: build
+    - store_artifacts:
+        path: ~/allure-reports
+        destination: build
     - store_test_results:
         path: ~/rspec
