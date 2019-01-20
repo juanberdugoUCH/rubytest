@@ -20,9 +20,10 @@ jobs:
         path: ~/rspec
 
   allure:
-    docker:
+    setup_remote_docker:
     - image: automationwizards/allure:1.4.24.RC3
     steps:
+    - checkout
     - run:
       command: |
         docker run \
