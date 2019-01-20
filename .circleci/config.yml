@@ -12,7 +12,7 @@ jobs:
     - run:
         command: touch ~/rspec/rspec.xml
     - run:
-        command: bundle exec rspec --format RspecJunitFormatter -out ~/rspec/rspec.xml
+        command: bundle exec rspec --format documentation  --format RspecJunitFormatter -o ~/rspec/rspec.xml
         when: always
     - store_test_results:
         path: ~/rspec
