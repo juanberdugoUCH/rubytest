@@ -24,7 +24,7 @@ jobs:
     - image: automationwizards/allure:1.4.24.RC3
     steps:
     - checkout
-    - run:
+    - run: |
         docker run \
         -v ~/rspec/allure-report:/allure-report \   # Mandatory - Where to place the complied report
         -v ~/rspec:/allure-results \ # Mandatory - Where to look for test runs
