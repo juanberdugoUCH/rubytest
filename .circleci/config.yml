@@ -25,7 +25,11 @@ jobs:
     steps:
     - checkout
     - run:
-      command: "echo 'hola'"
+        docker run \
+        -v ~/rspec/allure-report:/allure-report \   # Mandatory - Where to place the complied report
+        -v ~/rspec:/allure-results \ # Mandatory - Where to look for test runs
+        -v ~/rspec/allure-config:/allure-config \   # Optional - Where to look for an allure.properties file
+        automationwizards/allure:1.4.24.RC3 allure report generate /allure-results -o /allure-report
 
 workflows:
   version: 2
