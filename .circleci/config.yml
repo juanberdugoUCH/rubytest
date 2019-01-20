@@ -5,6 +5,12 @@ jobs:
     docker: # use the docker executor type; machine and macos executors are also supported
     - image: circleci/ruby:2.4.2-jessie-node # the primary container, where your job's commands are run
     - image: automationwizards/allure:1.4.24.RC3
+      command: |
+         docker run \
+             -v $(pwd)/allure-report:/allure-report \   # Mandatory - Where to place the complied report
+             -v $(pwd)/rspec:/allure-results \ # Mandatory - Where to look for test runs
+             -v $(pwd)/allure-config:/allure-config \   # Optional - Where to look for an allure.properties file
+             automationwizards/allure:1.4.24.RC3 allure report generate /allure-results -o /allure-report
     steps:
     - checkout # check out the code in the project directory
     - setup_remote_docker
@@ -20,9 +26,3 @@ jobs:
         destination: build
     - store_test_results:
         path: ~/rspec
-    - run: |
-         docker run \
-             -v $(pwd)/allure-report:/allure-report \   # Mandatory - Where to place the complied report
-             -v $(pwd)/rspec:/allure-results \ # Mandatory - Where to look for test runs
-             -v $(pwd)/allure-config:/allure-config \   # Optional - Where to look for an allure.properties file
-             automationwizards/allure:1.4.24.RC3 allure report generate /allure-results -o /allure-report
