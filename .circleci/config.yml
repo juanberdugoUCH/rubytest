@@ -24,11 +24,12 @@ jobs:
         when: always
     - run:
         command: allure generate ~/rspec --report-dir ~/rspec/allure-reports
+    - run:
+        command: zip -r allure.zip ~/rspec/allure-reports
+    - run:
+        command: rm -r ~/rspec/allure-reports
     - store_artifacts:
         path: ~/rspec
         destination: build
-    - store_artifacts:
-        path: ~/rspec/allure-reports
-        destination: allure
     - store_test_results:
         path: ~/rspec
