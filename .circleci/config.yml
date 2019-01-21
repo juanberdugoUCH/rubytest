@@ -13,6 +13,7 @@ jobs:
         sudo apt install -t jessie-backports  openjdk-8-jre-headless ca-certificates-java
     - run:
         sudo apt install nodejs npm
+    - run:
         sudo npm install -g allure-commandline --save-dev
         sudo ln -s /usr/bin/nodejs /usr/bin/node
     - run: bundle check --path=vendor/bundle || bundle install --path=vendor/bundle --jobs=4 --retry=3
