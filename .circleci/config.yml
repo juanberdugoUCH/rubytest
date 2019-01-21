@@ -14,6 +14,7 @@ jobs:
         sudo apt-get update
         sudo apt install -t jessie-backports  openjdk-8-jre-headless ca-certificates-java
     - run: |
+        sudo apt install software-properties-common
         sudo apt-add-repository ppa:qameta/allure
         sudo apt-get update
         sudo apt-get install allure
