@@ -13,11 +13,7 @@ jobs:
         sudo rm -rf /var/lib/apt/lists/*
         sudo apt-get update
         sudo apt install -t jessie-backports  openjdk-8-jre-headless ca-certificates-java
-    - run: |
-        sudo apt install software-properties-common
-        sudo apt-add-repository ppa:qameta/allure
-        sudo apt-get update
-        sudo apt-get install allure
+    - run: curl -o allure-2.6.0.tgz -Ls https://dl.bintray.com/qameta/generic/io/qameta/allure/allure/2.6.0/allure-2.6.0.tgz && tar -zxvf allure-2.6.0.tgz -C /opt/ && ln -s /opt/allure-2.6.0/bin/allure /usr/bin/allure && allure --version
     - run: bundle check --path=vendor/bundle || bundle install --path=vendor/bundle --jobs=4 --retry=3
     - run: mkdir ~/rspec
     - run:
