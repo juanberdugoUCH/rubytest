@@ -6,10 +6,8 @@ jobs:
     - image: circleci/ruby:2.4.3-browsers # the primary container, where your job's commands are run
     steps:
     - checkout # check out the code in the project directory
-#    - run:
-#        command: sudo apt-get update && sudo apt-get install default-jre
-    - run: sudo su -c 'echo "deb http://deb.debian.org/debian jessie-backports main" >> /etc/apt/sources.list'
     - run: |
+        sudo su -c 'echo "deb http://deb.debian.org/debian jessie-backports main" >> /etc/apt/sources.list'
         sudo rm -rf /var/lib/apt/lists/*
         sudo apt-get update
         sudo apt install -t jessie-backports  openjdk-8-jre-headless ca-certificates-java
@@ -20,7 +18,6 @@ jobs:
     - run: sudo ln -s /usr/bin/nodejs /usr/bin/node
     - run: bundle check --path=vendor/bundle || bundle install --path=vendor/bundle --jobs=4 --retry=3
     - run: mkdir ~/rspec
-    - run: mkdir ~/rspec/allure-reports
     - run: touch ~/rspec/rspec.xml
     - run:
         command: bundle exec rspec --format documentation  --format RspecJunitFormatter -o ~/rspec/rspec.xml
@@ -29,8 +26,6 @@ jobs:
         command: allure generate ~/rspec --report-dir ~/rspec/allure-reports
     - run:
         command: zip -r ~/rspec/allure.zip ~/rspec/allure-reports
-#    - run:
-#        command: rm -r ~/rspec/allure-reports
     - store_artifacts:
         path: ~/rspec
         destination: build
