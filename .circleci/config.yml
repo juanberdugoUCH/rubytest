@@ -19,9 +19,8 @@ jobs:
         command:  sudo npm install -g allure-commandline --save-dev
     - run: bundle check --path=vendor/bundle || bundle install --path=vendor/bundle --jobs=4 --retry=3
     - run: mkdir ~/rspec
-      - run: mkdir ~/rspec/allure-reports
-    - run:
-        command: touch ~/rspec/rspec.xml
+    - run: mkdir ~/rspec/allure-reports
+    - run: touch ~/rspec/rspec.xml
     - run:
         command: bundle exec rspec --format documentation  --format RspecJunitFormatter -o ~/rspec/rspec.xml
         when: always
